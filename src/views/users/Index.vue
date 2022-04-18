@@ -12,15 +12,15 @@
         <table class="table table-responsive table-hover text-center">
           <thead class="table-dark">
             <tr>
-              <th>Title</th>
-              <th>body</th>
+              <th>name</th>
+              <th>email</th>
               <th class="text-danger">Action</th>
             </tr>
           </thead>
           <tbody class="table-light">
-            <tr v-for="p in posts" :key="p.id">
-              <td>{{ p.title }}</td>
-              <td>{{ p.body }}</td>
+            <tr v-for="p in users" :key="p.id">
+              <td>{{ p.name }}</td>
+              <td>{{ p.email }}</td>
               <td>
                 <button
                   class="btn btn-info"
@@ -66,17 +66,17 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 class="modal-name" id="exampleModalLabel">Modal name</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
+          <div class="modal-email">
             <div class="mb-2">
-              <label for class="form-label">Title</label>
-              <input type="text" class="form-control" v-model="post.title" />
+              <label for class="form-label">name</label>
+              <input type="text" class="form-control" v-model="user.name" />
             </div>
             <div class="mb-2">
-              <label for class="form-label">Body</label>
-              <input type="text" class="form-control" v-model="post.body" />
+              <label for class="form-label">email</label>
+              <input type="text" class="form-control" v-model="user.email" />
             </div>
           </div>
           <div class="modal-footer">
@@ -98,8 +98,8 @@
 
 import router from "../../router";
 
-import { add_post, update_post, del_post, get_all_posts } from "../../firebase/posts";
-//import { first, next, last } from "../../firebase/paginate";
+import { update, del,get_all } from "../../firebase/users";
+////import { first, next, last } from "../../firebase/paginate";
 import { first, next, prev ,last} from "../../firebase/pg-2";
 
 
@@ -114,16 +114,16 @@ export default {
   data() {
     return {
       h_id: null,
-      post: {
-        title: '',
-        body: '',
+      user: {
+        name: '',
+        email: '',
 
       },
-      posts: [],
+      users: [],
       msg: '',
       hasError: false,
       limit: 1,
-      order: 'title',
+      order: 'name',
       first_p: '',
       last_p: '',
     };
@@ -132,29 +132,26 @@ export default {
 
     get: async function () {
 
-
-
       await this.first();
-      // console.log('this.posts');
-      // console.log(this.posts);
-
-      // console.log(me.posts);
+      //await  get_all ;
+     
     },
     first: async function () {
 
-      this.posts = [];
-
-      var dd = await first()
-      this.posts = dd.result;
+      this.users = [];
+      var dd = await get_all()
+      this.users = dd.result;
       this.last_p = dd.lastVisible
+      console.log("this.users");
+      console.log(this.users);
 
     },
     next: async function () {
-      this.posts = [];
+      this.users = [];
 
       var dd = (await next(this.last_p))
 
-      this.posts = await dd.result;
+      this.users = await dd.result;
       this.last_p = dd.lastVisible
       this.start_p = dd.firstVisible
 
@@ -162,11 +159,11 @@ export default {
     },
     prev: async function () {
 
-      this.posts = [];
+      this.users = [];
      
       var dd = (await prev(this.start_p))
 
-      this.posts = await dd.result;
+      this.users = await dd.result;
       this.last_p = dd.lastVisible
 
 
@@ -176,18 +173,18 @@ export default {
      
       var dd = (await last(this.last_p))
 
-      this.posts = await dd.result;
+      this.users = await dd.result;
       this.last_p = dd.lastVisible
 
 
     },
 
     del: async function (id) {
-      del_post(id)
+      del(id)
       this.get(); //
     },
     update: async function () {
-      const r = await update_post(this.h_id, this.post)
+      const r = await update(this.h_id, this.user)
 
       this.hasError = r
 
@@ -196,14 +193,15 @@ export default {
     },
     edit(po) {
       this.h_id = po.id
-      this.post.title = po.title
-      this.post.body = po.body
+      this.user.name = po.name
+      this.user.email = po.email
     },
   },
   mounted() {
 
-    this.get();
-    // console.log('this.posts');
+    this.first();//
+    
+    console.log('this.users');
 
 
   },

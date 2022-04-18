@@ -4,6 +4,8 @@ import About from "../views/About.vue";
 import Login from "../views/Login.vue";
 import Posts from "../views/posts/Index.vue";
 import PostCreate from "../views/posts/Create.vue";
+import Users from "../views/Users/Index.vue";
+import Tasks from "../views/Tasks/Index.vue";
 
 
 const routes = [
@@ -11,6 +13,11 @@ const routes = [
     path: "/login",
     name: "Login",
     component: Login,
+  },
+  {
+    path: "/tasks",
+    name: "Tasks",
+    component: Tasks,
   },
   {
     path: "/",
@@ -32,6 +39,12 @@ const routes = [
     path: "/post/create",
     name: "PostCreate",
     component: PostCreate,
+  }
+  ,
+  {
+    path: "/users",
+    name: "users",
+    component: Users,
   }
 ];
 

@@ -22,6 +22,11 @@
               <router-link to="/" class="nav-link active" aria-current="page"
                 >Home</router-link
               >
+              </li>
+              <li>
+              <router-link to="/users" class="nav-link  " aria-current="page"
+                >Users</router-link
+              >
             </li>
             <li class="nav-item">
               <router-link to="/about" class="nav-link">Abaut</router-link>
