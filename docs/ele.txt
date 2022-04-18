@@ -1,0 +1,9 @@
+  //في_حالة_تطبيق_الكترون
+ base: path.resolve(__dirname, "./dist"), //
+
+npm run dev
+npm run package-win
+ **********************
+
+   //في_حالة_تطبيق_فيو
+ base: path.resolve(__dirname, "./dist"), //
