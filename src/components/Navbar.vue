@@ -128,6 +128,7 @@ export default {
           const uid = user.uid;
           // ...
         } else {
+          router.push('login')
           // User is signed out
           // ...
         }

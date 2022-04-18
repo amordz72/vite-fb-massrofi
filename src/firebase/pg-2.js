@@ -17,12 +17,8 @@ import {
 } from "firebase/firestore";
 
 
-
 const db = getFirestore(app);
 const tableName = 'posts';
-
-
-
 
 
 export async function first(limit_it = '2') {
@@ -83,7 +79,7 @@ export async function next(start_after, limit_it = 2) {
     console.log("next");
     console.log(result);
     console.log("firstVisible");
-    console.log(firstVisible  ._document.data.value.mapValue.fields );
+    console.log(firstVisible._document.data.value.mapValue.fields);
 
     return {
         lastVisible,
@@ -95,7 +91,7 @@ export async function next(start_after, limit_it = 2) {
 }
 
 
- export async function prev(first, limit_it = 2) {
+export async function prev(first, limit_it = 2) {
 
     const result = []
 
@@ -127,7 +123,7 @@ export async function next(start_after, limit_it = 2) {
 
 
 }
- export async function last(first, limit_it = 2) {
+export async function last(first, limit_it = 2) {
 
     const result = []
 

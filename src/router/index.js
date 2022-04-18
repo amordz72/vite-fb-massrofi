@@ -3,7 +3,7 @@ import Home from "../views/Home.vue";
 import About from "../views/About.vue";
 import Login from "../views/Login.vue";
 import Posts from "../views/posts/Index.vue";
-import Post_create from "../views/posts/Create.vue";
+import PostCreate from "../views/posts/Create.vue";
 
 
 const routes = [
@@ -30,8 +30,8 @@ const routes = [
   },
   {
     path: "/post/create",
-    name: "post_create",
-    component: Post_create,
+    name: "PostCreate",
+    component: PostCreate,
   }
 ];
 
